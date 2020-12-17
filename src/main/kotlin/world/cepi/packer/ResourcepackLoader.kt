@@ -43,15 +43,18 @@ class ResourcepackLoader {
 
     @Subscribe
     fun onPlayerDisconnect(event: DisconnectEvent) {
-        userLoadedCache.remove(event.player)
+        userLoadedCache.remove(event.player.uniqueId)
     }
 
     @Subscribe
     fun onPlayerAccept(event: PlayerResourcePackStatusEvent) {
-        if (event.status == PlayerResourcePackStatusEvent.Status.ACCEPTED) {
-            userLoadedCache.add(event.player.uniqueId)
-        } else {
-            event.player.sendMessage(Component.text("We highly reccomend accepting the resourcepack!"))
+        when (event.status) {
+            PlayerResourcePackStatusEvent.Status.SUCCESSFUL ->
+                userLoadedCache.add(event.player.uniqueId)
+            PlayerResourcePackStatusEvent.Status.DECLINED ->
+                event.player.sendMessage(Component.text("We highly reccomend accepting the resourcepack!"))
+            PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD ->
+                event.player.sendMessage(Component.text("The download failed; We reccomed relogging to try again."))
         }
     }
 }
