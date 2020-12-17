@@ -15,6 +15,7 @@ repositories {
 dependencies {
 
     implementation("com.velocitypowered:velocity-api:1.1.1")
+    annotationProcessor("com.velocitypowered:velocity-api:1.1.0-SNAPSHOT")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
