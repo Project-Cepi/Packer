@@ -2,7 +2,9 @@ package world.cepi.packer
 
 import com.velocitypowered.api.event.PostOrder
 import com.velocitypowered.api.event.Subscribe
+import com.velocitypowered.api.event.connection.LoginEvent
 import com.velocitypowered.api.event.connection.PostLoginEvent
+import com.velocitypowered.api.event.player.ServerConnectedEvent
 import java.net.URL
 import java.security.MessageDigest
 
@@ -31,7 +33,7 @@ class ResourcepackLoader {
     val url = "http://api.cepi.world/resourcepack"
 
     @Subscribe(order = PostOrder.EARLY)
-    fun onPlayerChat(event: PostLoginEvent) {
+    fun onPlayerChat(event: ServerConnectedEvent) {
         event.player.sendResourcePack(url, createSha1(url))
     }
 }
