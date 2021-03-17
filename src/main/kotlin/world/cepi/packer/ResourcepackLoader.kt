@@ -6,13 +6,22 @@ import com.velocitypowered.api.event.connection.DisconnectEvent
 import com.velocitypowered.api.event.player.PlayerResourcePackStatusEvent
 import com.velocitypowered.api.event.player.ServerPostConnectEvent
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.event.HoverEvent
+import net.kyori.adventure.text.format.NamedTextColor
 import java.net.URL
 import java.security.MessageDigest
 import java.util.*
 
 class ResourcepackLoader {
 
-    private val userLoadedCache: MutableList<UUID> = mutableListOf()
+    companion object {
+        const val url = "https://github.com/Project-Cepi/Resourcepack/releases/download/latest/pack.zip"
+
+        val prefix = Component.text("[!]", NamedTextColor.RED).append(Component.space())
+    }
+
+    private val userLoadedCache: MutableSet<UUID> = mutableSetOf()
 
     private fun createSha1(url: String): ByteArray {
         val digest = MessageDigest.getInstance("SHA-1")
@@ -45,16 +54,20 @@ class ResourcepackLoader {
             PlayerResourcePackStatusEvent.Status.SUCCESSFUL ->
                 userLoadedCache.add(event.player.uniqueId)
             PlayerResourcePackStatusEvent.Status.DECLINED ->
-                event.player.sendMessage(Component.text("We highly reccomend accepting the resourcepack!"))
+                event.player.sendMessage(
+                    prefix.append(Component.text("We highly reccomend accepting the resourcepack!", NamedTextColor.GRAY))
+                        .hoverEvent(HoverEvent.showText(Component.text("Or download directly", NamedTextColor.GRAY)))
+                        .clickEvent(ClickEvent.openUrl(url))
+                )
             PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD ->
-                event.player.sendMessage(Component.text("The download failed; We reccomed relogging to try again."))
+                event.player.sendMessage(
+                    prefix.append(Component.text("The download failed; We reccomed relogging to try again.", NamedTextColor.GRAY))
+                        .hoverEvent(HoverEvent.showText(Component.text("Or download directly", NamedTextColor.GRAY)))
+                        .clickEvent(ClickEvent.openUrl(url))
+                )
             else -> {
 
             }
         }
-    }
-
-    companion object {
-        const val url = "https://github.com/Project-Cepi/Resourcepack/releases/download/latest/pack.zip"
     }
 }
