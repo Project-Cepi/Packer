@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     kotlin("jvm") version "1.4.21"
@@ -17,7 +16,7 @@ repositories {
 dependencies {
 
     implementation("com.velocitypowered:velocity-api:1.1.4")
-    kapt("com.velocitypowered:velocity-api:1.1.4-SNAPSHOT")
+    kapt("com.velocitypowered:velocity-api:1.1.4")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
