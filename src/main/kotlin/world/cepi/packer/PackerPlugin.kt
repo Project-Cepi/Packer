@@ -8,7 +8,6 @@ import com.velocitypowered.api.plugin.Plugin
 import com.velocitypowered.api.proxy.ProxyServer
 import org.slf4j.Logger
 
-
 @Plugin(
     id = "packer",
     name = "Packer Plugin",
