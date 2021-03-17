@@ -15,12 +15,13 @@ import org.slf4j.Logger
     url = "https://cepi.world",
     description = "Handles resourcepacks from an external URL",
     authors = ["Cepi"],
-    dependencies = arrayOf(Dependency(id = "votlin"))
+    dependencies = [Dependency(id = "votlin")]
 )
 class PackerPlugin @Inject constructor(private val server: ProxyServer, private val logger: Logger) {
     @Subscribe
-    fun onProxyInitialization(event: ProxyInitializeEvent) {
-        server.eventManager.register(this, ResourcepackLoader())
+    fun onProxyInitialization(@SuppressWarnings event: ProxyInitializeEvent) {
+        server.eventManager.register(this, ResourcepackLoader)
+        PackerCommand.register(server)
         logger.info("[Packer] has been enabled!")
     }
 }

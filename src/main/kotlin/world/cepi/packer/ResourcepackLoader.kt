@@ -13,17 +13,15 @@ import java.net.URL
 import java.security.MessageDigest
 import java.util.*
 
-class ResourcepackLoader {
+object ResourcepackLoader {
 
-    companion object {
-        const val url = "https://github.com/Project-Cepi/Resourcepack/releases/download/latest/pack.zip"
+    const val url = "https://github.com/Project-Cepi/Resourcepack/releases/download/latest/pack.zip"
 
-        val prefix = Component.text("[!]", NamedTextColor.RED).append(Component.space())
-    }
+    val prefix = Component.text("[!]", NamedTextColor.RED).append(Component.space())
 
     private val userLoadedCache: MutableSet<UUID> = mutableSetOf()
 
-    private fun createSha1(url: String): ByteArray {
+    fun createSha1(url: String): ByteArray {
         val digest = MessageDigest.getInstance("SHA-1")
         val fileInputStream = URL(url).openStream()
         var n = 0
