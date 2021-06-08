@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
 
-    implementation("com.velocitypowered:velocity-api:1.1.5")
+    implementation("com.velocitypowered:velocity-api:1.1.8")
     kapt("com.velocitypowered:velocity-api:1.1.4")
 
     testImplementation(kotlin("test-junit5"))
