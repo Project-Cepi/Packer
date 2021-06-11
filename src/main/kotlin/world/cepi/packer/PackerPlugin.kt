@@ -20,8 +20,13 @@ import org.slf4j.Logger
 class PackerPlugin @Inject constructor(private val server: ProxyServer, private val logger: Logger) {
     @Subscribe
     fun onProxyInitialization(@SuppressWarnings event: ProxyInitializeEvent) {
+        Companion.server = server
         server.eventManager.register(this, ResourcepackLoader)
         PackerCommand.register(server)
         logger.info("[Packer] has been enabled!")
+    }
+
+    companion object {
+        lateinit var server: ProxyServer
     }
 }

@@ -4,7 +4,9 @@ import com.velocitypowered.api.event.PostOrder
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.DisconnectEvent
 import com.velocitypowered.api.event.player.PlayerResourcePackStatusEvent
+import com.velocitypowered.api.event.player.ServerConnectedEvent
 import com.velocitypowered.api.event.player.ServerPostConnectEvent
+import com.velocitypowered.api.proxy.player.ResourcePackInfo
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
@@ -36,9 +38,14 @@ object ResourcepackLoader {
     }
 
     @Subscribe(order = PostOrder.EARLY)
-    fun onPlayerConnect(event: ServerPostConnectEvent) {
+    fun onPlayerConnect(event: ServerConnectedEvent) {
         if (event.player.uniqueId !in userLoadedCache)
-            event.player.sendResourcePack(url, createSha1(url))
+            event.player.sendResourcePackOffer(
+                PackerPlugin.server.createResourcePackBuilder(url)
+                    .setHash(createSha1(url))
+                    .setPrompt(Component.text("Please install the Cepi resource pack!", NamedTextColor.YELLOW))
+                    .build()
+            )
     }
 
     @Subscribe
