@@ -38,7 +38,7 @@ object ResourcepackLoader {
     }
 
     @Subscribe(order = PostOrder.EARLY)
-    fun onPlayerConnect(event: ServerConnectedEvent) {
+    fun onPlayerConnect(event: ServerPostConnectEvent) {
         if (event.player.uniqueId !in userLoadedCache)
             event.player.sendResourcePackOffer(
                 PackerPlugin.server.createResourcePackBuilder(url)
