@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "world.cepi.packer"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -15,8 +15,8 @@ repositories {
 
 dependencies {
 
-    implementation("com.velocitypowered:velocity-api:1.1.8")
-    kapt("com.velocitypowered:velocity-api:1.1.8")
+    implementation("com.velocitypowered:velocity-api:3.0.0")
+    kapt("com.velocitypowered:velocity-api:3.0.0")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
