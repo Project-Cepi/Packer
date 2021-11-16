@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.0"
-    kotlin("kapt") version "1.5.31"
+    kotlin("kapt") version "1.6.0"
 }
 
 group = "world.cepi.packer"
