@@ -21,7 +21,7 @@ class PackerPlugin @Inject constructor(private val server: ProxyServer, private 
     @Subscribe
     fun onProxyInitialization(@SuppressWarnings event: ProxyInitializeEvent) {
         Companion.server = server
-        server.eventManager.register(this, ResourcepackLoader)
+        server.eventManager.register(this, EventListener)
         PackerCommand.register(server)
         logger.info("[Packer] has been enabled!")
     }
